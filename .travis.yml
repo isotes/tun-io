@@ -1,0 +1,23 @@
+language: java
+
+matrix:
+  include:
+    - os: linux
+    - os: osx
+
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -rf $HOME/.gradle/caches/*/plugin-resolution/
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+
+
+script:
+  - git clone https://github.com/isotes/tun-io-example
+  - cd tun-io-example
+  - ifconfig
+  - ./gradlew --include-build .. installDist
+  - sudo ./build/install/tun-io-example/bin/tun-io-example -a 192.168.222.5 --pings 3 --req-for-req --exit-after-ping 2>&1 | tee build/output.txt
+  - grep 'ICMP Echo' build/output.txt | wc -l | grep 6

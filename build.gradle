@@ -1,0 +1,109 @@
+plugins {
+	id 'java'
+	id 'maven-publish'
+	id 'signing'
+}
+
+group = 'io.github.isotes'
+version = '1.0.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'net.java.dev.jna:jna:5.3.1'
+
+	testImplementation 'org.zeroturnaround:zt-exec:1.10'
+	testImplementation 'org.slf4j:slf4j-jdk14:1.7.26'
+	testImplementation 'org.junit.jupiter:junit-jupiter:5.4.2'
+}
+
+javadoc {
+	source = sourceSets.main.allJava
+	excludes = ['io/github/isotes/net/tun/io/jna/**']
+	options.with {
+		links 'https://docs.oracle.com/javase/8/docs/api/', 'https://java-native-access.github.io/jna/4.2.1/'
+	}
+	if(JavaVersion.current().isJava9Compatible()) {
+		options.addBooleanOption('html5', true)
+	}
+}
+
+
+task sourcesJar(type: Jar) {
+	from sourceSets.main.allJava
+	archiveClassifier = 'sources'
+}
+
+task javadocJar(type: Jar) {
+	from javadoc
+	archiveClassifier = 'javadoc'
+}
+
+publishing {
+	publications {
+		mavenJava(MavenPublication) {
+			from components.java
+			artifact sourcesJar
+			artifact javadocJar
+			versionMapping {
+				usage('java-api') {
+					fromResolutionOf('runtimeClasspath')
+				}
+				usage('java-runtime') {
+					fromResolutionResult()
+				}
+			}
+			pom {
+				name = 'tun-io'
+				description = 'JNA based access to TUN devices on Linux and macOS'
+				url = 'https://github.com/isotes/tun-io'
+				licenses {
+					license {
+						name = 'The Apache License, Version 2.0'
+						url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+					}
+				}
+				developers {
+					developer {
+						name = 'Robert Sauter'
+						email = 'isotes@gmail.com'
+					}
+				}
+				scm {
+					connection = 'scm:git:https://github.com/isotes/tun-io.git'
+					developerConnection = 'scm:svn:https://github.com/isotes/tun-io.git'
+					url = 'https://github.com/isotes/tun-io'
+				}
+			}
+		}
+	}
+	repositories {
+		maven {
+			if (project.hasProperty('publishOssrh') && publishOssrh) {
+				def releasesRepoUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2"
+				def snapshotsRepoUrl = "https://oss.sonatype.org/content/repositories/snapshots"
+				url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+				authentication {
+					basic(BasicAuthentication)
+				}
+				credentials {
+					username = ossrhUsername
+					password = ossrhPassword
+				}
+			} else {
+				def releasesRepoUrl = "$buildDir/repos/releases"
+				def snapshotsRepoUrl = "$buildDir/repos/snapshots"
+				url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+			}
+		}
+	}
+}
+
+signing {
+	sign publishing.publications.mavenJava
+}
+
