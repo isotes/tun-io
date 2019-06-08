@@ -32,7 +32,7 @@ import java.nio.ByteOrder;
  * <p>The {@link Packet} class is used for reading and can be used for writing (in addition to byte arrays). Apart from
  * the {@link ByteBuffer} representing the packet, it contains a number of utility methods for easier manipulation.</p>
  *
- * <p>On Linux, we recommend creating and configuring the TUN device with the <tt>ip</tt> command which allows setting
+ * <p>On Linux, we recommend creating and configuring the TUN device with the <code>ip</code> command which allows setting
  * permissions so that the application using this library does not need to run with elevated privileges.</p>
  *
  * <p>See <a href="https://github.com/isotes/tun-io-example" target="_top">tun-io-example</a> for a full-fledged

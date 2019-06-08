@@ -2,10 +2,10 @@
 JNA based access to TUN devices on Linux and macOS.
 
 ## Use
-See [Maven Central](https://search.maven.org/search?q=g:io.github.isotes%20a:tun-io) for the current Maven coordinates. Additionally, you have to declare a dependency on [JNA](https://search.maven.org/search?q=g:net.java.dev.jna%20a:jna).
+See [Maven Central](https://search.maven.org/search?q=g:io.github.isotes%20a:tun-io) for the current Maven coordinates. Additionally, you have to declare a dependency on [JNA](https://search.maven.org/search?q=g:net.java.dev.jna%20a:jna). The library requires Java 8 but should also work with newer versions.
 
 ## API
-The main entry point is the [TunDevice](src/main/java/io/github/isotes/net/tun/io/TunDevice.java) class which contains several `open()` methods to open or create a TUN device. Afterwards, it is possible to read/write IPv4 and IPv6 packets. The following shows a minimal code snippet while a full-fledged example can be found in the [tun-io-example project](https://github.com/isotes/tun-io-example).
+The main entry point is the [TunDevice](src/main/java/io/github/isotes/net/tun/io/TunDevice.java) class which contains several `open()` methods to open or create a TUN device. Afterwards, it is possible to read/write IPv4 and IPv6 packets. The following shows a minimal code snippet while a full-fledged example can be found in the [tun-io-example project](https://github.com/isotes/tun-io-example) and the Javadoc is available [here](https://isotes.github.io/tun-io-javadoc/).
 
 
 ```Java
@@ -39,7 +39,7 @@ The only dependency is [JNA](https://github.com/java-native-access/jna) and the 
 
 
 ## Development
-The library is a Gradle project. The development is usually performed in combination with the tun-io-example project and using the [Gradle composite build](https://docs.gradle.org/current/userguide/composite_builds.html) feature (in conjunction with IntelliJ) has worked flawlessly. Just edit [`settings.gradle`](settings.gradle) of this project and add the line `includeBuild "../tun-io"` (adjust the path if necessary). Then open this project in the IDE to work on the library and the example project simultaneously.
+The library is a Gradle project. The development is usually performed in combination with the tun-io-example project and using the [Gradle composite build](https://docs.gradle.org/current/userguide/composite_builds.html) feature (in conjunction with IntelliJ) has worked flawlessly. Just edit `settings.gradle` of the example project and add the line `includeBuild "../tun-io"` (adjust the path if necessary). Then open that project in the IDE to work on this library and the example project simultaneously.
 
 
 ## License
