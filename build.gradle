@@ -29,6 +29,7 @@ javadoc {
 	}
 	if(JavaVersion.current().isJava9Compatible()) {
 		options.addBooleanOption('html5', true)
+		options.addStringOption('source', '1.8')
 	}
 }
 
@@ -104,6 +105,8 @@ publishing {
 }
 
 signing {
-	sign publishing.publications.mavenJava
+	required { !version.endsWith('SNAPSHOT') }
+	if (required) {
+		sign publishing.publications.mavenJava
+	}
 }
-
