@@ -1,4 +1,4 @@
-# tun-io
+# tun-io  [![License](https://img.shields.io/github/license/isotes/tun-io)](LICENSE)  [![Build Status](https://travis-ci.com/isotes/tun-io.svg?branch=master)](https://travis-ci.com/isotes/tun-io)  [![Javadoc](https://img.shields.io/badge/docs-javadoc-blue)](https://isotes.github.io/javadoc/tun-io-1.0.0/)  [![Maven Central](https://img.shields.io/maven-metadata/v?metadataUrl=https%3A%2F%2Frepo1.maven.org%2Fmaven2%2Fio%2Fgithub%2Fisotes%2Ftun-io%2Fmaven-metadata.xml)](https://search.maven.org/search?q=g:io.github.isotes%20a:tun-io)
 JNA based access to TUN devices on Linux and macOS.
 
 ## Use
