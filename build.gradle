@@ -14,7 +14,7 @@ repositories {
 }
 
 dependencies {
-	implementation 'net.java.dev.jna:jna:5.3.1'
+	implementation 'net.java.dev.jna:jna:5.13.0'
 
 	testImplementation 'org.zeroturnaround:zt-exec:1.10'
 	testImplementation 'org.slf4j:slf4j-jdk14:1.7.26'
@@ -25,7 +25,7 @@ javadoc {
 	source = sourceSets.main.allJava
 	excludes = ['io/github/isotes/net/tun/io/jna/**']
 	options.with {
-		links 'https://docs.oracle.com/javase/8/docs/api/', 'https://java-native-access.github.io/jna/4.2.1/'
+		links 'https://docs.oracle.com/javase/8/docs/api/', 'https://java-native-access.github.io/jna/5.13.0/javadoc/'
 	}
 	if(JavaVersion.current().isJava9Compatible()) {
 		options.addBooleanOption('html5', true)
